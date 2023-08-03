@@ -8,17 +8,17 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Libro implements Serializable {
     @Id
-    long isbn;
-    String titulo;
-    Integer anio;
-    Integer ejemplares;
-    Integer ejemplaresPrestados;
-    Integer ejemplaresRestantes;
-    boolean alta;
+    private long isbn;
+    private String titulo;
+    private Integer anio;
+    private Integer ejemplares;
+    private Integer ejemplaresPrestados;
+    private Integer ejemplaresRestantes;
+    private boolean alta;
     @ManyToOne
-    Autor autor;
+    private Autor autor;
     @ManyToOne
-    Editorial editorial;
+    private Editorial editorial;
 
     public Libro() {
     }

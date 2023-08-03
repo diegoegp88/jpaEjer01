@@ -10,9 +10,9 @@ import javax.persistence.Id;
 public class Autor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String nombre;
-    boolean alta;
+    private Integer id;
+    private String nombre;
+    private boolean alta;
 
     public Autor() {
     }
