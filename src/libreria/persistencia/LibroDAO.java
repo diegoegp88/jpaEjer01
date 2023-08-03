@@ -45,7 +45,7 @@ public class LibroDAO extends DAO<Libro> {
     
     public List<Libro> buscarPorAutor(int autorId) throws Exception {
         conectar();
-        List<Libro> libros = em.createQuery("SELECT l FROM Libro l where l.autor_id LIKE: autorId").setParameter("autor_id", autorId).getResultList();
+        List<Libro> libros = em.createQuery("SELECT l FROM Libro l where l.autor_id LIKE: autorId").setParameter("autorid", autorId).getResultList();
         desconectar();
         return libros;
     }
