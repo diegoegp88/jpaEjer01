@@ -12,6 +12,10 @@ public class EditorialDAO extends DAO<Editorial> {
     public void guardar(Editorial editorial) {
         super.guardar(editorial);
     }
+    
+    public void editar(Editorial editorial){
+        super.editar(editorial);
+    }
 
     public void eliminar(Integer id) throws Exception {
         Editorial editorial = buscarPorID(id);

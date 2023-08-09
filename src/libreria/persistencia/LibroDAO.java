@@ -21,6 +21,10 @@ public class LibroDAO extends DAO<Libro> {
         Libro libro = buscarPorISBN(isbn);
         super.eliminar(libro);
     }
+    
+    public void editar(Libro libro){
+        super.editar(libro);
+    }
 
     public List<Libro> listarTodos() throws Exception {
         conectar();
@@ -29,9 +33,9 @@ public class LibroDAO extends DAO<Libro> {
         return libros;
     }
 
-    public Libro buscarPorISBN(long isbn) throws Exception {
+    public Libro buscarPorISBN(long isbn){
         conectar();
-        Libro libro = (Libro) em.createQuery("SELECT l FROM Libro l WHERE l.isbn LIKE :isbn").setParameter("isbn", isbn).getSingleResult();
+        Libro libro = (Libro) em.createQuery("SELECT l FROM Libro l WHERE l.isbn LIKE :id").setParameter("id", isbn).getSingleResult();
         desconectar();
         return libro;
     }

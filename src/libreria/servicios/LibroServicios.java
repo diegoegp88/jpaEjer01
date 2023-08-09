@@ -109,6 +109,15 @@ public class LibroServicios {
                 throw new Exception("No se encontró una editorial con el ID proporcionado.");
             }
             libro.setEditorial(editorial);
+            
+            System.out.println("Ingrese la cantidad de ejemplares");
+            if(!(leer.hasNextInt())){
+                throw new Exception("La cantidad debe ser numerica y entera y positiva");
+            }
+            int cantidadEjem = leer.nextInt();
+            libro.setEjemplares(cantidadEjem);
+            libro.setEjemplaresPrestados(0);
+            libro.setEjemplaresRestantes(cantidadEjem);
 
             List<Libro> libros = lDAO.listarTodos();
 
@@ -133,51 +142,77 @@ public class LibroServicios {
     }
 
     public void modificarLibro() throws Exception {
-        System.out.println("Para modificar un libro, por favor ingrese lo siguiente:");
-        System.out.println();
-        System.out.println("Ingrese el ISBN del libro a modificar");
-        long isbn = leer.nextLong();
-        leer.nextLine(); // Limpiar el buffer después de leer un entero para evitar problemas con el siguiente nextLine().
+    System.out.println("Para modificar un libro, por favor ingrese lo siguiente:");
+    System.out.println();
+    System.out.println("Ingrese el ISBN del libro a modificar");
+    long isbn = leer.nextLong();
+    leer.nextLine(); // Limpiar el buffer 
 
-        try {
-            Libro libro = lDAO.buscarPorISBN(isbn);
+    try {
+        Libro libro = lDAO.buscarPorISBN(isbn);
 
-            if (libro == null) {
-                throw new Exception("No se encontró una editorial con el ID proporcionado.");
-            }
+        if (libro == null) {
+            throw new Exception("No se encontró un libro con el ISBN proporcionado.");
+        }
 
-            System.out.println("Ingrese el año del libro");
-            int anio = leer.nextInt();
-            leer.nextLine(); // Limpiar el buffer después de leer un entero.
+        System.out.println("Ingrese el año del libro (si no se modifica, ingrese 0)");
+        int anio = leer.nextInt();
+        leer.nextLine(); // Limpiar el buffer después de leer un entero.
+        if (anio != 0) {
             libro.setAnio(anio);
+        }
 
-            System.out.println("Ingrese el título del libro");
-            String titulo = leer.nextLine();
-            if (titulo.isEmpty()) {
-                throw new IllegalArgumentException("El título del libro no puede estar vacío.");
-            }
+        System.out.println("Ingrese el título del libro");
+        String titulo = leer.nextLine();
+        if (!titulo.isEmpty()) {
             libro.setTitulo(titulo);
+        }
 
-            System.out.println("Ingrese el ID del autor");
-            Autor autor = aDAO.buscarPorID(leer.nextInt());
+        System.out.println("Ingrese el ID del autor (si no se modifica, ingrese 0)");
+        int idAutor = leer.nextInt();
+        if (idAutor != 0) {
+            Autor autor = aDAO.buscarPorID(idAutor);
             if (autor == null) {
                 throw new Exception("No se encontró un autor con el ID proporcionado.");
             }
             libro.setAutor(autor);
+        }
 
-            System.out.println("Ingrese el ID de la editorial");
-            Editorial editorial = eDAO.buscarPorID(leer.nextInt());
+        System.out.println("Ingrese el ID de la editorial (si no se modifica, ingrese 0)");
+        int idEditorial = leer.nextInt();
+        if (idEditorial != 0) {
+            Editorial editorial = eDAO.buscarPorID(idEditorial);
             if (editorial == null) {
                 throw new Exception("No se encontró una editorial con el ID proporcionado.");
             }
             libro.setEditorial(editorial);
-
-            lDAO.guardar(libro);
-            System.out.println("¡Libro modificado correctamente!");
-        } catch (Exception e) {
-            System.out.println("Ha ocurrido un error: " + e.getMessage());
         }
+
+        System.out.println("Ingrese la cantidad de ejemplares a sumar (si no se suman, ingrese 0)");
+        int cantidadEjem = leer.nextInt();
+        if (cantidadEjem != 0) {
+            if (libro.getEjemplares() == null) {
+                libro.setEjemplares(cantidadEjem);
+            } else {
+                libro.setEjemplares(libro.getEjemplares() + cantidadEjem);
+            }
+            if (libro.getEjemplaresRestantes() == null) {
+                libro.setEjemplaresRestantes(cantidadEjem);
+            } else {
+                libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() + cantidadEjem);
+            }
+            if(libro.getEjemplaresPrestados()==null){
+                libro.setEjemplaresPrestados(0);
+            }
+        }
+
+        lDAO.editar(libro);
+        System.out.println("¡Libro modificado correctamente!");
+    } catch (Exception e) {
+        System.out.println("Ha ocurrido un error: " + e.getMessage());
     }
+}
+
 
     public void eliminarLibro() throws Exception {
         System.out.println("Para eliminar un libro, por favor ingrese lo siguiente:");

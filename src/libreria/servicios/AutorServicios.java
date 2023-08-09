@@ -112,7 +112,7 @@ public class AutorServicios {
             }
 
             autor.setNombre(nuevoNombreAutor);
-            aDAO.guardar(autor);
+            aDAO.editar(autor);
             System.out.println("¡Autor modificado correctamente!");
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error: " + e.getMessage());

@@ -16,6 +16,10 @@ public class AutorDAO extends DAO<Autor> {
     public void guardar(Autor autor) {
         super.guardar(autor);
     }
+    
+    public void editar(Autor autor){
+        super.editar(autor);
+    }
 
     public void eliminar(Integer id){
         Autor autor = buscarPorID(id);

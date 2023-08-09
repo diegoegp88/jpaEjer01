@@ -9,6 +9,8 @@ public class LiberiaServicios {
     AutorServicios aServ = new AutorServicios();
     EditorialServicios eServ = new EditorialServicios();
     LibroServicios lServ = new LibroServicios();
+    ClienteServicios cServ = new ClienteServicios();
+    PrestamoServicios pServ = new PrestamoServicios();
    
     
     
@@ -18,13 +20,10 @@ public class LiberiaServicios {
         System.out.println();
         System.out.println("1) Menu de Autor.");
         System.out.println("2) Menu de Editorial.");
-        System.out.println("3) Menu de libros.");
-        System.out.println("4) .");
-        System.out.println("5) .");
-        System.out.println("6) .");
-        System.out.println("7) .");
-        System.out.println("8) .");
-        System.out.println("9) Salir.");
+        System.out.println("3) Menu de Libros.");
+        System.out.println("4) Menu de Clientes.");
+        System.out.println("5) Menu de Prestamos.");
+        System.out.println("6) Salir.");
 
         int op;
         while (true) {
@@ -62,21 +61,14 @@ public class LiberiaServicios {
                 menu();
                 break;
             case 4:
+                cServ.menu();
                 menu();
                 break;
             case 5:
+                pServ.menu();
                 menu();
                 break;
             case 6:
-                menu();
-                break;
-            case 7:
-                menu();
-                break;
-            case 8:
-                menu();
-                break;
-            case 9:
                 System.out.println("El programa termina");
                 break;
             default:

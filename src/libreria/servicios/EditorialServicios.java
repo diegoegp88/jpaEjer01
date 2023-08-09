@@ -108,7 +108,7 @@ public class EditorialServicios {
             }
 
             editorial.setNombre(nuevoNombreEditorial);
-            eDAO.guardar(editorial);
+            eDAO.editar(editorial);
             System.out.println("¡Editorial modificado correctamente!");
         } catch (Exception e) {
             System.out.println("Ha ocurrido un error: " + e.getMessage());
